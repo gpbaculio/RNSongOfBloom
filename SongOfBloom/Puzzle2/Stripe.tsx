@@ -1,4 +1,4 @@
-import type { SkRect, SkiaValue, Vector } from "@shopify/react-native-skia";
+import type {SkRect, SkiaValue, Vector} from '@shopify/react-native-skia';
 import {
   rect,
   runTiming,
@@ -9,17 +9,17 @@ import {
   Vertices,
   useValue,
   vec,
-} from "@shopify/react-native-skia";
-import { createNoise2D, createNoise3D } from "simplex-noise";
+} from '@shopify/react-native-skia';
+import {createNoise2D, createNoise3D} from 'simplex-noise';
 
-import { Skeleton } from "./Skeleton";
-import { Skia } from "@shopify/react-native-skia/lib/typescript/src/skia/types";
+import {Skeleton} from './Skeleton';
+import {Skia} from '@shopify/react-native-skia/lib/typescript/src/skia/types';
 
 const pad = 6;
 
 const generateTrianglePointsAndIndices = (
   rct: SkRect,
-  triangleNumberHeight: number
+  triangleNumberHeight: number,
 ) => {
   const vertices: Vector[] = [];
   const textures: Vector[] = [];
@@ -34,7 +34,7 @@ const generateTrianglePointsAndIndices = (
     for (let j = 0; j <= 1; j++) {
       const point: Vector = vec(
         rct.x + j * triangleWidth,
-        rct.y + i * triangleHeight
+        rct.y + i * triangleHeight,
       );
       textures.push(point);
       vertices.push(point);
@@ -53,7 +53,7 @@ const generateTrianglePointsAndIndices = (
     indices.push(bottomLeftIndex, topRightIndex, bottomRightIndex);
   }
 
-  return { vertices, indices, textures };
+  return {vertices, indices, textures};
 };
 
 interface StripeProps {
@@ -81,16 +81,16 @@ export const Stripe = ({
   const noise = createNoise2D();
   const x = index * stripeWidth;
   const rct = rect(x, 0, stripeWidth - 5, height);
-  const { vertices, indices, textures } = generateTrianglePointsAndIndices(
+  const {vertices, indices, textures} = generateTrianglePointsAndIndices(
     rct,
-    20
+    20,
   );
   const animatedVertices = useComputedValue(() => {
     if (
       currentIndex.current === index &&
       currentIndex.current !== previousIndex.current
     ) {
-      runTiming(f, 2, { duration: 100 }, () => {
+      runTiming(f, 2, {duration: 100}, () => {
         runSpring(f, 1);
       });
     }
@@ -99,7 +99,6 @@ export const Stripe = ({
       const A = 5;
       const fx = 50;
       const fy = 0.0005;
-      const F = 1;
       const d =
         amplitude.current *
         A *

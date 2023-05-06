@@ -61,7 +61,7 @@ export const Puzzle2 = () => {
       }
     },
     onEnd: e => {
-      if (y.current > frameRect.y + frameRect.height) {
+      if (y.current + pictureRect.y > frameRect.y + frameRect.height - 40) {
         runTiming(y, screen.height, {duration: 650});
         runTiming(amplitude, 8);
       }
